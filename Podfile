@@ -1,0 +1,10 @@
+platform:ios, '9.1'
+pod 'SDWebImage'
+pod 'UMengAnalytics'
+pod 'SVProgressHUD'
+pod 'MJRefresh'
+pod 'Masonry'
+pod 'Bugtags'
+pod 'Aspects'
+pod 'YYImage'
+inhibit_all_warnings!

@@ -1,0 +1,35 @@
+PODS:
+  - Aspects (1.4.1)
+  - Bugtags (1.2.2)
+  - Masonry (0.6.4)
+  - MJRefresh (3.1.0)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
+  - SVProgressHUD (2.0.2)
+  - UMengAnalytics (3.6.6)
+  - YYImage (1.0.1):
+    - YYImage/Core (= 1.0.1)
+  - YYImage/Core (1.0.1)
+
+DEPENDENCIES:
+  - Aspects
+  - Bugtags
+  - Masonry
+  - MJRefresh
+  - SDWebImage
+  - SVProgressHUD
+  - UMengAnalytics
+  - YYImage
+
+SPEC CHECKSUMS:
+  Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
+  Bugtags: adadbd0616575e91c79e70b204f62b699a43efda
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SVProgressHUD: e4020e23badbd7cc61bc4a80d3c1da57f166a978
+  UMengAnalytics: 4bf831415146b9c57cb10be65fbd43462ef8cf65
+  YYImage: b41b45bc5f32bfcdf67bdfb9c09da9e9832357c0
+
+COCOAPODS: 0.39.0
