@@ -15,7 +15,6 @@
 		409F325C1C9A4E0000FFD00C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 409F325B1C9A4E0000FFD00C /* AppDelegate.m */; };
 		409F32621C9A4E0000FFD00C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 409F32601C9A4E0000FFD00C /* Main.storyboard */; };
 		409F32641C9A4E0000FFD00C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 409F32631C9A4E0000FFD00C /* Assets.xcassets */; };
-		409F32671C9A4E0000FFD00C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 409F32651C9A4E0000FFD00C /* LaunchScreen.storyboard */; };
 		409F32721C9A4E0000FFD00C /* DrawingBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 409F32711C9A4E0000FFD00C /* DrawingBoardTests.m */; };
 		409F327D1C9A4E0000FFD00C /* DrawingBoardUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 409F327C1C9A4E0000FFD00C /* DrawingBoardUITests.m */; };
 		409F328F1C9A4E5B00FFD00C /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 409F328E1C9A4E5B00FFD00C /* UIView+Frame.m */; };
@@ -27,6 +26,7 @@
 		409F32A91C9A894B00FFD00C /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409F32A81C9A894B00FFD00C /* CanvasView.swift */; };
 		40A22A551C9A9C010050A815 /* BBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A22A541C9A9C010050A815 /* BBSettings.m */; };
 		40B848121CACF55000393E4D /* BBSaveAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40B848111CACF55000393E4D /* BBSaveAlertView.m */; };
+		40E96B2F1CF42C31007AE295 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E96B2E1CF42C31007AE295 /* LaunchScreen.storyboard */; };
 		EC7A9B2A6C9D9A2E29B966C0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6930E3E7D9E0EB1543A3B2D3 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +62,6 @@
 		409F325B1C9A4E0000FFD00C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		409F32611C9A4E0000FFD00C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		409F32631C9A4E0000FFD00C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		409F32661C9A4E0000FFD00C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		409F32681C9A4E0000FFD00C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		409F326D1C9A4E0000FFD00C /* DrawingBoardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrawingBoardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		409F32711C9A4E0000FFD00C /* DrawingBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawingBoardTests.m; sourceTree = "<group>"; };
@@ -87,6 +86,7 @@
 		40A22A541C9A9C010050A815 /* BBSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSettings.m; sourceTree = "<group>"; };
 		40B848101CACF55000393E4D /* BBSaveAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSaveAlertView.h; sourceTree = "<group>"; };
 		40B848111CACF55000393E4D /* BBSaveAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSaveAlertView.m; sourceTree = "<group>"; };
+		40E96B2E1CF42C31007AE295 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6930E3E7D9E0EB1543A3B2D3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		783F67F57694B5C9EE3B30CB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D3A5CDC32E79EF2DBF10EB1F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 				409F32A01C9A4F0500FFD00C /* SwiftFiles */,
 				406FE9D21CA3D366006E665D /* Three */,
 				409F32631C9A4E0000FFD00C /* Assets.xcassets */,
-				409F32651C9A4E0000FFD00C /* LaunchScreen.storyboard */,
+				40E96B2E1CF42C31007AE295 /* LaunchScreen.storyboard */,
 				409F32681C9A4E0000FFD00C /* Info.plist */,
 				409F32571C9A4E0000FFD00C /* Supporting Files */,
 			);
@@ -393,7 +393,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				409F32671C9A4E0000FFD00C /* LaunchScreen.storyboard in Resources */,
+				40E96B2F1CF42C31007AE295 /* LaunchScreen.storyboard in Resources */,
 				409F32641C9A4E0000FFD00C /* Assets.xcassets in Resources */,
 				409F32621C9A4E0000FFD00C /* Main.storyboard in Resources */,
 			);
@@ -524,14 +524,6 @@
 				409F32611C9A4E0000FFD00C /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		409F32651C9A4E0000FFD00C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				409F32661C9A4E0000FFD00C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
