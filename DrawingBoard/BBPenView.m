@@ -57,6 +57,12 @@
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
+    UITouch *touch = [touches anyObject];
+    
+    if ([touch.view isKindOfClass:[DWBubbleMenuButton class]] || [touch.view isKindOfClass:[UIImageView class]]) {
+        return;
+    }
+
     [self hideenSlider:YES];
     
     if ([BBSettings defaultSettings].isEraserState) {
@@ -70,6 +76,14 @@
 
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
+    UITouch *touch = [touches anyObject];
+    
+    if ([touch.view isKindOfClass:[DWBubbleMenuButton class]] || [touch.view isKindOfClass:[UIImageView class]]) {
+        return;
+    }
+    
+    DLogRed(@"%@",touch.view);
+
     [self.canvasView drawTouches:touches withEvent:event];
 }
 
