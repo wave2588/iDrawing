@@ -10,6 +10,7 @@
 		401738751CA4010400F95122 /* UIImage+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 401738741CA4010400F95122 /* UIImage+Category.m */; };
 		40364AB61CA046AB0068D860 /* UIFont+PreferredFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 40364AB51CA046AB0068D860 /* UIFont+PreferredFont.m */; };
 		40364AB91CA046B20068D860 /* UIColor+colorStr.m in Sources */ = {isa = PBXBuildFile; fileRef = 40364AB81CA046B20068D860 /* UIColor+colorStr.m */; };
+		4037BA7A1DBA1C05008B25E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4037BA791DBA1C05008B25E2 /* LaunchScreen.storyboard */; };
 		406FE9E21CA3DA50006E665D /* DWBubbleMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 406FE9E11CA3DA50006E665D /* DWBubbleMenuButton.m */; };
 		409F32591C9A4E0000FFD00C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 409F32581C9A4E0000FFD00C /* main.m */; };
 		409F325C1C9A4E0000FFD00C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 409F325B1C9A4E0000FFD00C /* AppDelegate.m */; };
@@ -26,7 +27,6 @@
 		409F32A91C9A894B00FFD00C /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409F32A81C9A894B00FFD00C /* CanvasView.swift */; };
 		40A22A551C9A9C010050A815 /* BBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A22A541C9A9C010050A815 /* BBSettings.m */; };
 		40B848121CACF55000393E4D /* BBSaveAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40B848111CACF55000393E4D /* BBSaveAlertView.m */; };
-		40E96B2F1CF42C31007AE295 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E96B2E1CF42C31007AE295 /* LaunchScreen.storyboard */; };
 		EC7A9B2A6C9D9A2E29B966C0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6930E3E7D9E0EB1543A3B2D3 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +54,7 @@
 		40364AB51CA046AB0068D860 /* UIFont+PreferredFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+PreferredFont.m"; sourceTree = "<group>"; };
 		40364AB71CA046B20068D860 /* UIColor+colorStr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+colorStr.h"; sourceTree = "<group>"; };
 		40364AB81CA046B20068D860 /* UIColor+colorStr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+colorStr.m"; sourceTree = "<group>"; };
+		4037BA791DBA1C05008B25E2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		406FE9E01CA3DA50006E665D /* DWBubbleMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWBubbleMenuButton.h; sourceTree = "<group>"; };
 		406FE9E11CA3DA50006E665D /* DWBubbleMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWBubbleMenuButton.m; sourceTree = "<group>"; };
 		409F32541C9A4E0000FFD00C /* DrawingBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,7 +87,6 @@
 		40A22A541C9A9C010050A815 /* BBSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSettings.m; sourceTree = "<group>"; };
 		40B848101CACF55000393E4D /* BBSaveAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSaveAlertView.h; sourceTree = "<group>"; };
 		40B848111CACF55000393E4D /* BBSaveAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSaveAlertView.m; sourceTree = "<group>"; };
-		40E96B2E1CF42C31007AE295 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6930E3E7D9E0EB1543A3B2D3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		783F67F57694B5C9EE3B30CB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D3A5CDC32E79EF2DBF10EB1F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 				409F32A01C9A4F0500FFD00C /* SwiftFiles */,
 				406FE9D21CA3D366006E665D /* Three */,
 				409F32631C9A4E0000FFD00C /* Assets.xcassets */,
-				40E96B2E1CF42C31007AE295 /* LaunchScreen.storyboard */,
+				4037BA791DBA1C05008B25E2 /* LaunchScreen.storyboard */,
 				409F32681C9A4E0000FFD00C /* Info.plist */,
 				409F32571C9A4E0000FFD00C /* Supporting Files */,
 			);
@@ -393,7 +393,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40E96B2F1CF42C31007AE295 /* LaunchScreen.storyboard in Resources */,
+				4037BA7A1DBA1C05008B25E2 /* LaunchScreen.storyboard in Resources */,
 				409F32641C9A4E0000FFD00C /* Assets.xcassets in Resources */,
 				409F32621C9A4E0000FFD00C /* Main.storyboard in Resources */,
 			);
@@ -569,6 +569,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -606,6 +607,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -630,6 +632,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DrawingBoard/DrawingBoard-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -652,6 +655,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DrawingBoard/DrawingBoard-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

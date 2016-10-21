@@ -58,9 +58,9 @@ class CanvasView: UIView {
         
         let context = CGBitmapContextCreate(nil, Int(size.width), Int(size.height), 8, 0, colorSpace, CGImageAlphaInfo.PremultipliedLast.rawValue)
 
-        CGContextSetLineCap(context, .Round)
+        CGContextSetLineCap(context!, .Round)
         let transform = CGAffineTransformMakeScale(scale, scale)
-        CGContextConcatCTM(context, transform)
+        CGContextConcatCTM(context!, transform)
         
         return context!
     }()
