@@ -357,6 +357,7 @@
 					409F32531C9A4E0000FFD00C = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 334F27LL3L;
+						ProvisioningStyle = Manual;
 					};
 					409F326C1C9A4E0000FFD00C = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -621,6 +622,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 334F27LL3L;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = DrawingBoard/ProjectSettings.h;
@@ -629,7 +631,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wave.iDrawing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "72008a85-77f0-46c3-a830-a7705543fbdd";
+				PROVISIONING_PROFILE_SPECIFIER = Debug_Board;
 				SWIFT_OBJC_BRIDGING_HEADER = "DrawingBoard/DrawingBoard-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -644,7 +647,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 334F27LL3L;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = DrawingBoard/ProjectSettings.h;
@@ -653,7 +657,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wave.iDrawing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "55b23986-c9b1-45cb-a74a-fc01af3cb43a";
+				PROVISIONING_PROFILE_SPECIFIER = Release_Board;
 				SWIFT_OBJC_BRIDGING_HEADER = "DrawingBoard/DrawingBoard-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;
