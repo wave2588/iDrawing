@@ -173,6 +173,7 @@
 				409F325B1C9A4E0000FFD00C /* AppDelegate.m */,
 				409F32A51C9A558800FFD00C /* ProjectSettings.h */,
 				409F32A61C9A558800FFD00C /* ProjectSettings.m */,
+				409F32991C9A4EC800FFD00C /* DrawingBoard-Bridging-Header.h */,
 				409F328C1C9A4E2000FFD00C /* Views */,
 				409F328B1C9A4E1700FFD00C /* Controllers */,
 				409F328A1C9A4E1300FFD00C /* Tools */,
@@ -255,7 +256,6 @@
 			children = (
 				409F32A81C9A894B00FFD00C /* CanvasView.swift */,
 				409F329D1C9A4F0100FFD00C /* Line.swift */,
-				409F32991C9A4EC800FFD00C /* DrawingBoard-Bridging-Header.h */,
 			);
 			name = SwiftFiles;
 			sourceTree = "<group>";
@@ -356,7 +356,7 @@
 				TargetAttributes = {
 					409F32531C9A4E0000FFD00C = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 334F27LL3L;
+						DevelopmentTeam = 85V32XYZPL;
 						ProvisioningStyle = Automatic;
 					};
 					409F326C1C9A4E0000FFD00C = {
@@ -570,7 +570,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -608,7 +608,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -622,7 +622,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 334F27LL3L;
+				DEVELOPMENT_TEAM = 85V32XYZPL;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = DrawingBoard/ProjectSettings.h;
@@ -635,7 +635,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DrawingBoard/DrawingBoard-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -648,7 +648,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 334F27LL3L;
+				DEVELOPMENT_TEAM = 85V32XYZPL;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = DrawingBoard/ProjectSettings.h;
@@ -660,7 +660,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DrawingBoard/DrawingBoard-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

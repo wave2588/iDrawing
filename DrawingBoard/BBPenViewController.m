@@ -60,7 +60,6 @@
 
     UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"确定要清空吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alertVc addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-
         [self.penView.canvasView clear];
     }]];
 
