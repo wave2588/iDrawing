@@ -629,7 +629,7 @@
 				INFOPLIST_FILE = DrawingBoard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.rsenjoyer.iDrawingBoard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wave.iDrawing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -655,7 +655,7 @@
 				INFOPLIST_FILE = DrawingBoard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.rsenjoyer.iDrawingBoard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wave.iDrawing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
