@@ -8,6 +8,7 @@
 
 #import "BBPenView.h"
 #import "DWBubbleMenuButton.h"
+#import "DrawingBoard-Swift.h"
 
 @interface BBPenView ()<DWBubbleMenuViewDelegate>
 
@@ -16,6 +17,7 @@
 @property (nonatomic,strong) UISlider *lineColorSlider;
 
 @property (nonatomic,strong) UILabel *eraserStateRemind;
+
 
 @end
 
@@ -52,6 +54,7 @@
     self.canvasView.backgroundColor = [UIColor whiteColor];
 
     [self dragLineColorSlider:self.lineColorSlider];
+    
     self.canvasView.lineColor = [self calculateSliderColor];
 }
 
@@ -71,8 +74,10 @@
         self.canvasView.lineColor = self.lineColorSlider.thumbTintColor;
     }
 
-    [self.canvasView drawTouches:touches withEvent:event];
+    [self.canvasView drawTouchesWithTouches:touches withEvent:event];
 }
+
+
 
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
@@ -81,15 +86,14 @@
     if ([touch.view isKindOfClass:[DWBubbleMenuButton class]] || [touch.view isKindOfClass:[UIImageView class]]) {
         return;
     }
-    
-    DLogRed(@"%@",touch.view);
+    [self.canvasView drawTouchesWithTouches:touches withEvent:event];
 
-    [self.canvasView drawTouches:touches withEvent:event];
 }
 
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.canvasView drawTouches:touches withEvent:event];
-    [self.canvasView endTouches:touches cancel:NO];
+     [self.canvasView drawTouchesWithTouches:touches withEvent:event];
+    
+    [self.canvasView endTouchesWithTouches:touches cancel:NO];
 }
 
 -(void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -97,8 +101,7 @@
     if (!touches) {
         return;
     }
-    
-    [self.canvasView endTouches:touches cancel:NO];
+    [self.canvasView endTouchesWithTouches:touches cancel:NO];
     
 }
 

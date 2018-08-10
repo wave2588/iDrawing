@@ -27,10 +27,11 @@ class Line: NSObject {
     func updateWithTouch(touch: UITouch) -> (Bool, CGRect) {
         if  let estimationUpdateIndex = touch.estimationUpdateIndex,
             let point = pointsWaitingForUpdatesByEstimationIndex[estimationUpdateIndex] {
-            var rect = updateRectForExistingPoint(point)
-            let didUpdate = point.updateWithTouch(touch)
+            
+            var rect = updateRectForExistingPoint(point: point)
+            let didUpdate = point.updateWithTouch(touch: touch)
             if didUpdate {
-                rect.unionInPlace(updateRectForExistingPoint(point))
+                rect = rect.union(updateRectForExistingPoint(point: point))
             }
 //            if point.estimatedPropertiesExpectingUpdates == [] {
 //                pointsWaitingForUpdatesByEstimationIndex.removeValueForKey(estimationUpdateIndex)
@@ -55,26 +56,27 @@ class Line: NSObject {
         
         points.append(point)
         
-        let updateRect = updateRectForLinePoint(point, previousPoint: previousPoint)
+        let updateRect = updateRectForLinePoint(point: point, previousPoint: previousPoint)
         
         return updateRect
     }
     
     func removePointsWithType(type: LinePoint.PointType) -> CGRect {
         var updateRect = CGRect.null
+        
         var priorPoint: LinePoint?
         
         points = points.filter { point in
             let keepPoint = !point.pointType.contains(type)
             
             if !keepPoint {
-                var rect = self.updateRectForLinePoint(point)
+                var rect = self.updateRectForLinePoint(point: point)
                 
                 if let priorPoint = priorPoint {
-                    rect.unionInPlace(updateRectForLinePoint(priorPoint))
+                    rect = rect.union(updateRectForLinePoint(point: priorPoint))
                 }
                 
-                updateRect.unionInPlace(rect)
+                updateRect = updateRect.union(rect)
             }
             
             priorPoint = point
@@ -87,9 +89,9 @@ class Line: NSObject {
     
     func cancel() -> CGRect {
         let updateRect = points.reduce(CGRect.null) { accumulated, point in
-            point.pointType.unionInPlace(.Cancelled)
+            _ = point.pointType.union(.Cancelled)
             
-            return accumulated.union(updateRectForLinePoint(point))
+            return accumulated.union(updateRectForLinePoint(point: point))
         }
         
         return updateRect
@@ -112,22 +114,23 @@ class Line: NSObject {
             let location = usePreciseLocation ? point.preciseLocation : point.location
             let priorLocation = usePreciseLocation ? priorPoint.preciseLocation : priorPoint.location
 //
-            CGContextSetStrokeColorWithColor(context, self.newLineColor.CGColor)
+            context.setStrokeColor(self.newLineColor.cgColor)
             
-            CGContextBeginPath(context)
+            context.beginPath()
             
-            CGContextMoveToPoint(context, priorLocation.x, priorLocation.y)
-            CGContextAddLineToPoint(context, location.x, location.y)
+            context.move(to: CGPoint(x: priorLocation.x, y: priorLocation.y))
+            context.addLine(to: CGPoint(x: location.x, y: location.y))
+            
             
 //            if BBSettings.defaultSettings().isEraserState{
 //            
 //                CGContextSetLineWidth(context, 200);
 //            }else{
-                CGContextSetLineWidth(context, point.magnitude);
+            context.setLineWidth( point.magnitude)
 //            }
             
             
-            CGContextStrokePath(context)
+            context.strokePath()
   
             maybePriorPoint = point
         }
@@ -142,12 +145,11 @@ class Line: NSObject {
             points.removeAll()
         }
         else {
-            for (index, point) in allPoints.enumerate() {
-                guard point.pointType.intersect([.NeedsUpdate, .Predicted]).isEmpty && index < allPoints.count - 2 else {
+            for (index, point) in allPoints.enumerated() {
+                guard point.pointType.intersection([.NeedsUpdate, .Predicted]).isEmpty,  index < allPoints.count - 2 else {
                     committing.append(points.first!)
                     break
                 }
-                
                 guard index > 0 else { continue }
                 
                 let removed = points.removeFirst()
@@ -160,14 +162,13 @@ class Line: NSObject {
         committedLine.newLineColor = self.newLineColor;
 
         committedLine.points = committing
-        committedLine.drawInContext(context,  usePreciseLocation: usePreciseLocation);
+        committedLine.drawInContext(context: context,  usePreciseLocation: usePreciseLocation);
         
         
         if committedPoints.count > 0 {
             committedPoints.removeLast()
         }
-        
-        committedPoints.appendContentsOf(committing)
+        committedPoints.append(contentsOf: committing)
     }
     
     func drawCommitedPointsInContext(context: CGContext,  usePreciseLocation: Bool) {
@@ -175,7 +176,7 @@ class Line: NSObject {
         //
         committedLine.newLineColor = self.newLineColor;
         committedLine.points = committedPoints
-        committedLine.drawInContext(context,  usePreciseLocation: usePreciseLocation);
+        committedLine.drawInContext(context: context, usePreciseLocation: usePreciseLocation)
     }
     
     // MARK: Convenience
@@ -184,7 +185,7 @@ class Line: NSObject {
         var rect = CGRect(origin: point.location, size: CGSize.zero)
         
         let magnitude = -3 * point.magnitude - 2
-        rect.insetInPlace(dx: magnitude, dy: magnitude)
+        rect = rect.insetBy(dx: magnitude, dy: magnitude)
         
         return rect
     }
@@ -196,25 +197,26 @@ class Line: NSObject {
 
         if let previousPoint = optionalPreviousPoint {
             pointMagnitude = max(pointMagnitude, previousPoint.magnitude)
-            rect = CGRectUnion(rect, CGRect(origin:previousPoint.location, size: CGSize.zero))
+            rect = rect.union(CGRect(origin:previousPoint.location, size: CGSize.zero))
         }
         
         let magnitude = -3.0 * pointMagnitude - 2.0
-        rect.insetInPlace(dx: magnitude, dy: magnitude)
+        
+        rect.insetBy(dx: magnitude, dy: magnitude)
         
         return rect
     }
     
     func updateRectForExistingPoint(point: LinePoint) -> CGRect {
-        var rect = updateRectForLinePoint(point)
+        var rect = updateRectForLinePoint(point: point)
         
         let arrayIndex = point.sequenceNumber - points.first!.sequenceNumber
 
         if arrayIndex > 0 {
-            rect = CGRectUnion(rect,updateRectForLinePoint(point, previousPoint: points[arrayIndex-1]))
+            rect = rect.union(updateRectForLinePoint(point: point, previousPoint: points[arrayIndex-1]))
         }
         if arrayIndex + 1 < points.count {
-            rect = CGRectUnion(rect,updateRectForLinePoint(point, previousPoint: points[arrayIndex+1]))
+            rect = rect.union(updateRectForLinePoint(point: point, previousPoint: points[arrayIndex+1]))
         }
         return rect
     }
@@ -225,7 +227,7 @@ class Line: NSObject {
 class LinePoint: NSObject  {
     // MARK: Types
     
-    struct PointType: OptionSetType {
+    struct PointType: OptionSet {
         // MARK: Properties
         
         let rawValue: Int
@@ -245,7 +247,7 @@ class LinePoint: NSObject  {
     // MARK: Properties
     
     var sequenceNumber: Int
-    let timestamp: NSTimeInterval
+    let timestamp: TimeInterval
     var force: CGFloat
     var location: CGPoint
     var preciseLocation: CGPoint
@@ -262,7 +264,7 @@ class LinePoint: NSObject  {
         
 //        return max(force, 0.025)
         
-        if BBSettings.defaultSettings().isEraserState{
+        if BBSettings.default().isEraserState{
             return 25;
         }else{
             return max(force, 0.025)
@@ -278,14 +280,14 @@ class LinePoint: NSObject  {
         
         timestamp = touch.timestamp
         let view = touch.view
-        location = touch.locationInView(view)
-        preciseLocation = touch.preciseLocationInView(view)
-        azimuthAngle = touch.azimuthAngleInView(view)
+        location = touch.location(in: view)
+        preciseLocation = touch.preciseLocation(in: view)
+        azimuthAngle = touch.azimuthAngle(in: view)
         estimatedProperties = touch.estimatedProperties
 //        estimatedPropertiesExpectingUpdates = touch.estimatedPropertiesExpectingUpdates
         altitudeAngle = touch.altitudeAngle
         
-        force = (type == .Stylus || touch.force > 0) ? touch.force : 1.0
+        force = (type == .stylus || touch.force > 0) ? touch.force : 1.0
  
         
 //        if !estimatedPropertiesExpectingUpdates.isEmpty {
@@ -296,30 +298,29 @@ class LinePoint: NSObject  {
     }
 
     func updateWithTouch(touch: UITouch) -> Bool {
-        guard let estimationUpdateIndex = touch.estimationUpdateIndex
-            where estimationUpdateIndex == estimationUpdateIndex else { return false }
+        guard let estimationUpdateIndex = touch.estimationUpdateIndex, estimationUpdateIndex == estimationUpdateIndex else { return false }
         
-        let touchProperties: [UITouchProperties] = [.Altitude, .Azimuth, .Force, .Location]
+        let touchProperties: [UITouchProperties] = [.altitude, .azimuth, .force, .location]
         
         for expectedProperty in touchProperties {
 //            guard !estimatedPropertiesExpectingUpdates.contains(expectedProperty) else { continue }
             
             switch expectedProperty {
-                case UITouchProperties.Force:
+            case UITouchProperties.force:
                     force = touch.force
-                case UITouchProperties.Azimuth:
-                    azimuthAngle = touch.azimuthAngleInView(touch.view)
-                case UITouchProperties.Altitude:
+            case UITouchProperties.azimuth:
+                    azimuthAngle = touch.azimuthAngle(in: touch.view)
+            case UITouchProperties.altitude:
                     altitudeAngle = touch.altitudeAngle
-                case UITouchProperties.Location:
-                    location = touch.locationInView(touch.view)
-                    preciseLocation = touch.preciseLocationInView(touch.view)
+            case UITouchProperties.location:
+                    location = touch.location(in: touch.view)
+                    preciseLocation = touch.preciseLocation(in: touch.view)
                 default:
                     ()
             }
 
             if !touch.estimatedProperties.contains(expectedProperty) {
-                estimatedProperties.subtractInPlace(expectedProperty)
+                estimatedProperties.subtract(expectedProperty)
             }
             
 //            if !touch.estimatedPropertiesExpectingUpdates.contains(expectedProperty) {

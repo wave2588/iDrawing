@@ -11,9 +11,8 @@ import UIKit
 var eraserState = true;
 
 @available(iOS 9.1, *)
-class CanvasView: UIView {
+@objc class CanvasView: UIView {
     
-
     override init(frame: CGRect) {
         super.init(frame: frame)
      
@@ -25,12 +24,13 @@ class CanvasView: UIView {
     
     // MARK: Properties
     
-    let isPredictionEnabled = UIDevice.currentDevice().userInterfaceIdiom == .Pad
-    let isTouchUpdatingEnabled = true
+    public let isPredictionEnabled = UIDevice.current.userInterfaceIdiom == .pad
 
-    var lineColor = UIColor();
+    public let isTouchUpdatingEnabled = true
+
+    @objc var lineColor: UIColor = UIColor()
     
-    var usePreciseLocations = false {
+    public var usePreciseLocations = false {
         didSet {
             needsFullRedraw = true
             setNeedsDisplay()
@@ -38,66 +38,68 @@ class CanvasView: UIView {
     }
 
     
-    var needsFullRedraw = true
+    public var needsFullRedraw = true
     
-    var lines = [Line]()
+    public var lines = [Line]()
     
-    var finishedLines = [Line]()
-
-    let activeLines = NSMapTable.strongToStrongObjectsMapTable()
+    public var finishedLines = [Line]()
     
-    let pendingLines = NSMapTable.strongToStrongObjectsMapTable()
-
-    lazy var frozenContext: CGContext = {
+    public let activeLines = NSMapTable<AnyObject, AnyObject>.strongToStrongObjects()
+    public let pendingLines = NSMapTable<AnyObject, AnyObject>.strongToStrongObjects()
+    
+    public lazy var frozenContext: CGContext = {
+        
         let scale = self.window!.screen.scale
         var size = self.bounds.size
         
         size.width *= scale
         size.height *= scale
         let colorSpace = CGColorSpaceCreateDeviceRGB()
+    
         
-        let context = CGBitmapContextCreate(nil, Int(size.width), Int(size.height), 8, 0, colorSpace, CGImageAlphaInfo.PremultipliedLast.rawValue)
+        let context = CGContext(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
 
-        CGContextSetLineCap(context!, .Round)
-        let transform = CGAffineTransformMakeScale(scale, scale)
-        CGContextConcatCTM(context!, transform)
+        context!.setLineCap(.round)
+        let transform = CGAffineTransform(scaleX: scale, y: scale)
+        context!.concatenate(transform)
         
         return context!
     }()
     
 
-    var frozenImage: CGImage?
+    public var frozenImage: CGImage?
     
     // MARK: Drawing
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()!
         
-        CGContextSetLineCap(context, .Round)
+        context.setLineCap(.round)
+        context.setLineWidth(2.0)
 //
-        CGContextSetStrokeColorWithColor(context,self.lineColor.CGColor);
+        context.setStrokeColor(self.lineColor.cgColor);
         
         if (needsFullRedraw) {
             setFrozenImageNeedsUpdate()
-            CGContextClearRect(frozenContext, bounds)
+            
+            frozenContext.clear(bounds)
+            
             for array in [finishedLines,lines] {
                 for line in array {
-                    line.drawCommitedPointsInContext(frozenContext,  usePreciseLocation: usePreciseLocations)
+                    line.drawCommitedPointsInContext(context: frozenContext, usePreciseLocation: usePreciseLocations)
                 }
             }
             needsFullRedraw = false
         }
 
-        frozenImage = frozenImage ?? CGBitmapContextCreateImage(frozenContext)
+        frozenImage = frozenImage ?? frozenContext.makeImage()
         
         if let frozenImage = frozenImage {
-            CGContextDrawImage(context, bounds, frozenImage)
+            context.draw(frozenImage, in: bounds)
         }
         
         for line in lines {
-//            line.newLineColor = self.lineColor;
-//            line.selestColorIndex = self.selestColorIndex;
-            line.drawInContext(context,  usePreciseLocation: usePreciseLocations)
+            line.drawInContext(context: context,  usePreciseLocation: usePreciseLocations)
             
         }
     }
@@ -108,7 +110,7 @@ class CanvasView: UIView {
     
     // MARK: Actions
     
-    func clear() {
+     @objc func clear() {
         activeLines.removeAllObjects()
         pendingLines.removeAllObjects()
         lines.removeAll()
@@ -119,27 +121,29 @@ class CanvasView: UIView {
     
     // MARK: Convenience
     
-    func drawTouches(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    @objc func drawTouches(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
         var updateRect = CGRect.null
         
         for touch in touches {
 
-            let line = activeLines.objectForKey(touch) as? Line ?? addActiveLineForTouch(touch)
+            let line = activeLines.object(forKey: touch) as? Line ?? addActiveLineForTouch(touch: touch)
             
-            updateRect.unionInPlace(line.removePointsWithType(.Predicted))
+            updateRect = updateRect.union(line.removePointsWithType(type: .Predicted))
             
-            let coalescedTouches = event?.coalescedTouchesForTouch(touch) ?? []
-            let coalescedRect = addPointsOfType(.Coalesced, forTouches: coalescedTouches, toLine: line, currentUpdateRect: updateRect)
-            updateRect.unionInPlace(coalescedRect)
+            let coalescedTouches = event?.coalescedTouches(for: touch) ?? []
+            
+            let coalescedRect = addPointsOfType(type: .Coalesced, forTouches: coalescedTouches, toLine: line, currentUpdateRect: updateRect)
+            updateRect = updateRect.union(coalescedRect)
             
 //            if isPredictionEnabled {
-                let predictedTouches = event?.predictedTouchesForTouch(touch) ?? []
-                let predictedRect = addPointsOfType(.Predicted, forTouches: predictedTouches, toLine: line, currentUpdateRect: updateRect)
-                updateRect.unionInPlace(predictedRect)
+            let predictedTouches = event?.predictedTouches(for: touch) ?? []
+            let predictedRect = addPointsOfType(type: .Predicted, forTouches: predictedTouches, toLine: line, currentUpdateRect: updateRect)
+            updateRect = updateRect.union(predictedRect)
 //            }
         }
         
-        setNeedsDisplayInRect(updateRect)
+        setNeedsDisplay(updateRect)
     }
 
     func addActiveLineForTouch(touch: UITouch) -> Line {
@@ -151,60 +155,65 @@ class CanvasView: UIView {
         return newLine
     }
     
-    func addPointsOfType(var type: LinePoint.PointType, forTouches touches: [UITouch], toLine line: Line, currentUpdateRect updateRect: CGRect) -> CGRect {
-        var accumulatedRect = CGRect.null
+    func addPointsOfType(type: LinePoint.PointType, forTouches touches: [UITouch], toLine line: Line, currentUpdateRect updateRect: CGRect) -> CGRect {
         
-        for (idx, touch) in touches.enumerate() {
-            let isStylus = touch.type == .Stylus
+        var type = type
+        
+        var accumulatedRect = CGRect.null
+    
+        for (idx, touch) in touches.enumerated() {
+            let isStylus = touch.type == .stylus
             
 
             if !isStylus {
-                type.unionInPlace(.Finger)
+                type = type.union(.Finger)
             }
         
 
             if isTouchUpdatingEnabled && !touch.estimatedProperties.isEmpty {
-                type.unionInPlace(.NeedsUpdate)
+                type = type.union(.NeedsUpdate)
             }
             
 
             if type.contains(.Coalesced) && idx == touches.count - 1 {
-                type.subtractInPlace(.Coalesced)
-                type.unionInPlace(.Standard)
+                
+               type.subtract(.Coalesced)
+               type = type.union(.Standard)
             }
             
-            let touchRect = line.addPointOfType(type, forTouch: touch)
-            accumulatedRect.unionInPlace(touchRect)
+            let touchRect = line.addPointOfType(pointType: type, forTouch: touch)
+            accumulatedRect = accumulatedRect.union(touchRect)
             
-            commitLine(line)
+            commitLine(line: line)
         }
         
         return updateRect.union(accumulatedRect)
     }
 
-    func endTouches(touches: Set<UITouch>, cancel: Bool) {
+    @objc func endTouches(touches: Set<UITouch>, cancel: Bool) {
         var updateRect = CGRect.null
         
         for touch in touches {
 
-            guard let line = activeLines.objectForKey(touch) as? Line else { continue }
+            guard let line = activeLines.object(forKey: touch) as? Line else { continue }
             
-
-            if cancel { updateRect.unionInPlace(line.cancel()) }
+            if cancel {
+                updateRect = updateRect.union(line.cancel())
+                
+            }
             
 
             if line.isComplete || !isTouchUpdatingEnabled {
-                finishLine(line)
+                finishLine(line: line)
             }
 
             else {
                 pendingLines.setObject(line, forKey: touch)
             }
             
-            activeLines.removeObjectForKey(touch)
+            activeLines.removeObject(forKey: touch)
         }
-
-        setNeedsDisplayInRect(updateRect)
+        setNeedsDisplay(updateRect)
     }
     
     func updateEstimatedPropertiesForTouches(touches: Set<NSObject>) {
@@ -213,8 +222,8 @@ class CanvasView: UIView {
         for touch in touches {
             var isPending = false
             
-            let possibleLine: Line? = activeLines.objectForKey(touch) as? Line ?? {
-                let pendingLine = pendingLines.objectForKey(touch) as? Line
+            let possibleLine: Line? = activeLines.object(forKey: touch) as? Line ?? {
+                let pendingLine = pendingLines.object(forKey: touch) as? Line
                 isPending = pendingLine != nil
                 return pendingLine
             }()
@@ -222,21 +231,21 @@ class CanvasView: UIView {
 
             guard let line = possibleLine else { return }
             
-            switch line.updateWithTouch(touch) {
+            switch line.updateWithTouch(touch: touch) {
                 case (true, let updateRect):
-                    setNeedsDisplayInRect(updateRect)
+                    setNeedsDisplay(updateRect)
                 default:
                     ()
             }
             
 
             if isPending && line.isComplete {
-                finishLine(line)
-                pendingLines.removeObjectForKey(touch)
+                finishLine(line: line)
+                pendingLines.removeObject(forKey: touch)
             }
 
             else {
-                commitLine(line)
+                commitLine(line: line)
             }
             
         }
@@ -244,18 +253,19 @@ class CanvasView: UIView {
     
     func commitLine(line: Line) {
         
-        line.drawFixedPointsInContext(frozenContext,  usePreciseLocation: usePreciseLocations)
+        line.drawFixedPointsInContext(context: frozenContext,  usePreciseLocation: usePreciseLocations)
         
         setFrozenImageNeedsUpdate()
     }
     
     func finishLine(line: Line) {
         
-        line.drawFixedPointsInContext(frozenContext,  usePreciseLocation: usePreciseLocations, commitAll: true)
+        line.drawFixedPointsInContext(context: frozenContext,  usePreciseLocation: usePreciseLocations, commitAll: true)
         
         setFrozenImageNeedsUpdate()
-
-        lines.removeAtIndex(lines.indexOf(line)!)
+        if let index = lines.index(of: line) {
+            lines.remove(at: index)
+        }
 //        line.dslineColor = self.viewColor;
 
         finishedLines.append(line)
